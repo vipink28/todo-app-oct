@@ -7,10 +7,12 @@ import TaskList from './pages/TaskList';
 import CreateTask from './pages/CreateTask';
 import Profile from './pages/Profile';
 import PageNotFound from './pages/PageNotFound';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/about' element={<About />}></Route>
