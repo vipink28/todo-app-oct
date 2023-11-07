@@ -18,6 +18,7 @@ function Login(props) {
         const users = await response.json();
         if(users.length > 0){
             setMessage("Logged in successfully");
+            localStorage.setItem("todoUser", JSON.stringify(users[0]));
         }else{
             setMessage("Email/Password incorrect");
         }
@@ -25,7 +26,6 @@ function Login(props) {
 
     return (
         <form>
-
             <div className="mb-3">
                 <label className='form-label'>Email</label>
                 <input type="text" name='email' className='form-control' onChange={handleChange} />
