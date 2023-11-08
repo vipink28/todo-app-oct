@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 function Navbar(props) {
+  const [user, setUser]=useState(null);
+  //useEffect(()=>{}, [])
+
+  const getLocalUser = ()=>{
+    let local = localStorage.getItem("todoUser");
+    let userData = JSON.parse(local);
+    setUser(userData);
+  }
+
+  const logout = ()=>{
+    localStorage.removeItem("todoUser");
+  }
+
+
+  useEffect(()=>{      
+   getLocalUser();
+  }, [])
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white" aria-label="Fifth navbar example">
         <div className="container-fluid">
@@ -15,13 +33,19 @@ function Navbar(props) {
     
           <div className="collapse navbar-collapse" id="navbarsExample05">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+             
+              {
+                !user ?
+              <>
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>
+              </> :
 
+              <>
               <li className="nav-item">
                 <Link className="nav-link" to="/task-list">Task List</Link>
               </li>
@@ -35,13 +59,15 @@ function Navbar(props) {
               </li>
              
               <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</Link>
+                <Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">{user.name}</Link>
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="#">Action</Link></li>
                   <li><Link className="dropdown-item" to="#">Another action</Link></li>
-                  <li><Link className="dropdown-item" to="#">Something else here</Link></li>
+                  <li><Link className="dropdown-item" to="#" onClick={logout}>Logout</Link></li>
                 </ul>
               </li>
+              </>
+              }
             </ul>         
           </div>
         </div>

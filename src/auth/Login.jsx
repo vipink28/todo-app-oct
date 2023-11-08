@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+    const navigate = useNavigate();
 
     const [message, setMessage]=useState("");
     const [formData, setFormData]=useState();
@@ -19,6 +21,7 @@ function Login(props) {
         if(users.length > 0){
             setMessage("Logged in successfully");
             localStorage.setItem("todoUser", JSON.stringify(users[0]));
+            navigate("/task-list");
         }else{
             setMessage("Email/Password incorrect");
         }
