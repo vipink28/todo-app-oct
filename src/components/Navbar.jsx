@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
+import AuthContext from '../auth/AuthContext';
 
 function Navbar(props) {
-  const [user, setUser]=useState(null);
-  //useEffect(()=>{}, [])
 
-  const getLocalUser = ()=>{
-    let local = localStorage.getItem("todoUser");
-    let userData = JSON.parse(local);
-    setUser(userData);
-  }
+    const {user} = useContext(AuthContext);
 
-  const logout = ()=>{
+    const logout = ()=>{
     localStorage.removeItem("todoUser");
   }
 
 
-  useEffect(()=>{      
-   getLocalUser();
-  }, [])
+  
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white" aria-label="Fifth navbar example">
