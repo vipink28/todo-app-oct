@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
 function Login(props) {
     
-    const {login, message} = useContext(AuthContext);
+    const {login, message, setMessage} = useContext(AuthContext);
     
     const [formData, setFormData]=useState();
     const handleChange=(e)=>{
@@ -19,6 +19,10 @@ function Login(props) {
         e.preventDefault();
         login(formData);
     }
+
+    useEffect(()=>{
+        setMessage("");
+    }, [])
 
     return (
         <form>

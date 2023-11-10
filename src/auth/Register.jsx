@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AuthContext from './AuthContext';
 
 function Register(props) {
-    const [message, setMessage]=useState("");
+    const {register, message, setMessage} = useContext(AuthContext);
     const [formData, setFormData]=useState();
     const handleChange=(e)=>{
         const {name, value} = e.target;
@@ -11,36 +12,14 @@ function Register(props) {
         }))
     }
 
-    const submitForm=async(e)=>{
+    const submitForm = (e)=>{
         e.preventDefault();
-        //fetch
-        const config = {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(formData)
-        }
-        const checkUser = await fetch(`http://localhost:5000/users?email=${formData.email}`, {method:"GET"});
-        if(checkUser.ok){
-            const user = await checkUser.json();
-            if(user.length > 0){
-                setMessage("user already exist");
-            }else{
-                const response = await fetch(`http://localhost:5000/users`, config);
-                
-                if(response.status === 201){
-                    const user = await response.json();
-                    setMessage("Registered Successfully");
-                    localStorage.setItem("todoUser", JSON.stringify(user))                    
-                }else{
-                    setMessage("something went wrong");
-                }
-            }
-        }else{
-            setMessage("something went wrong, please try again")
-        }  
+        register(formData);
     }
+
+    useEffect(()=>{
+        setMessage("");
+    }, [])
 
     return (
         <form>

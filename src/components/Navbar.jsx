@@ -5,14 +5,7 @@ import AuthContext from '../auth/AuthContext';
 
 function Navbar(props) {
 
-    const {user} = useContext(AuthContext);
-
-    const logout = ()=>{
-    localStorage.removeItem("todoUser");
-  }
-
-
-  
+    const {user, logout} = useContext(AuthContext); 
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white" aria-label="Fifth navbar example">
@@ -56,7 +49,7 @@ function Navbar(props) {
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="#">Action</Link></li>
                   <li><Link className="dropdown-item" to="#">Another action</Link></li>
-                  <li><Link className="dropdown-item" to="#" onClick={logout}>Logout</Link></li>
+                  <li><span className="dropdown-item" onClick={logout}>Logout</span></li>
                 </ul>
               </li>
               </>
@@ -69,3 +62,14 @@ function Navbar(props) {
 }
 
 export default Navbar;
+
+
+// state - useState() 
+// props - children prop();
+// conditional rendering, classes, style
+// display list - using map()
+// useEffect() - 
+// routing - child routes and outlet
+// Link and Navlink
+// navigate - 
+// Context Api - to keep the data centralized

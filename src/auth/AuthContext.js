@@ -15,27 +15,86 @@ export const AuthProvider = ({ children }) => {
     //login user
 
     const login =async(formData)=>{
-        const response = await fetch(`${baseUrl}/${endpoints.users}?email=${formData.email}&password=${formData.password}`, {method:"GET"});
+        const response = await fetch(`${baseUrl}/${endpoints.usersEndpoint}?email=${formData.email}&password=${formData.password}`, {method:"GET"});
         const users = await response.json();
         if(users.length > 0){
             setMessage("Logged in successfully");
             localStorage.setItem("todoUser", JSON.stringify(users[0]));
             setUser(users[0]);
-            navigate("/task-list");
+            setTimeout(()=>{
+                navigate("/task-list");
+            }, 3000)
+            
         }else{
             setMessage("Email/Password incorrect");
         }
     }
 
 
+    //register user
+    const register=async(formData)=>{        
+        //fetch
+        const config = {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(formData)
+        }
+        const checkUser = await fetch(`http://localhost:5000/users?email=${formData.email}`, {method:"GET"});
+        if(checkUser.ok){
+            const user = await checkUser.json();
+            if(user.length > 0){
+                setMessage("user already exist");
+            }else{
+                const response = await fetch(`http://localhost:5000/users`, config);
+                
+                if(response.status === 201){
+                    const user = await response.json();
+                    setMessage("Registered Successfully");
+                    localStorage.setItem("todoUser", JSON.stringify(user));
+                    setUser(user);
+                    setTimeout(()=>{
+                        navigate("/task-list");
+                    }, 3000)
+                }else{
+                    setMessage("something went wrong");
+                }
+            }
+        }else{
+            setMessage("something went wrong, please try again")
+        }  
+    }
+
+
+    const logout = ()=>{
+        localStorage.removeItem("todoUser");
+        setUser(null);
+        navigate("/");
+    }
+    
 
 
 
     //check user from localstorage
-    const getLocalUser = () => {
+    const getLocalUser = async() => {
         let local = localStorage.getItem("todoUser");
-        let userData = JSON.parse(local);
-        setUser(userData);
+        if(local){
+            let userData = JSON.parse(local);
+            const response = await fetch(`${baseUrl}/${endpoints.usersEndpoint}?email=${userData.email}`, {method:"GET"});
+            if(response.ok){
+                let userDetails = await response.json();
+                if(userDetails.length > 0){
+                    setUser(userData);
+                }else{
+                    localStorage.removeItem("todoUser");
+                    navigate("/");
+                }
+            }else{
+                console.log("something went wrong");
+            }
+        }     
+        
     }
 
     useEffect(() => {
@@ -47,7 +106,9 @@ export const AuthProvider = ({ children }) => {
             user,
             login,
             message,
-            setMessage
+            setMessage,
+            register,
+            logout
         }}>
             {children}
         </AuthContext.Provider>

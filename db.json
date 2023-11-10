@@ -13,9 +13,6 @@
       "id": 2
     },
     {
-      "name": "Vipin",
-      "email": "vipin@gmail.com",
-      "password": "admin",
       "id": 3
     },
     {
@@ -23,6 +20,12 @@
       "email": "aman@gmail.com",
       "password": "admin",
       "id": 4
+    },
+    {
+      "name": "Raghav",
+      "email": "raghav@gmail.com",
+      "password": "admin",
+      "id": 5
     }
   ],
   "tasks": []
