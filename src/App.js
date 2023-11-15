@@ -11,11 +11,13 @@ import Navbar from './components/Navbar';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import { AuthProvider } from './auth/AuthContext';
+import { TaskProvider } from './context/TaskContext';
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <TaskProvider>
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />}>
@@ -28,6 +30,7 @@ function App() {
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='*' element={<PageNotFound />}></Route>
         </Routes>
+        </TaskProvider>
       </AuthProvider>
     </BrowserRouter>
   );

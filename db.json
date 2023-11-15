@@ -26,7 +26,20 @@
       "email": "raghav@gmail.com",
       "password": "admin",
       "id": 5
+    },
+    {
+      "name": "Vipin Kumar",
+      "email": "vipin@gmail.com",
+      "password": "admin",
+      "id": 6
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "title": "Meeting",
+      "description": "Meeting with client",
+      "duedate": "2023-11-17T13:23",
+      "id": 1
+    }
+  ]
 }
