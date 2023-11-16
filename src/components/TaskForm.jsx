@@ -1,19 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../auth/AuthContext';
 import TaskContext from '../context/TaskContext';
 
 function TaskForm(props) {
+    const init = {
+        title: "",
+        description: "",
+        duedate: ""
+    }
+
     const [formData, setFormData] = useState(null);
-    const { message } = useContext(AuthContext);
+    const { message, user } = useContext(AuthContext);
     const { saveTask } = useContext(TaskContext);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }))
+        if (user) {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value,
+                userId: user.id,
+                modifiedOn: Date()
+            }))
+        }
     }
+
+
 
     const onCreate = (e) => {
         e.preventDefault();

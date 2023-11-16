@@ -37,9 +37,43 @@
   "tasks": [
     {
       "title": "Meeting",
+      "userId": 6,
+      "modifiedOn": "Thu Nov 16 2023 09:37:27 GMT+0530 (India Standard Time)",
       "description": "Meeting with client",
-      "duedate": "2023-11-17T13:23",
+      "duedate": "2023-11-24T14:42",
       "id": 1
+    },
+    {
+      "title": "Meeting",
+      "userId": 6,
+      "modifiedOn": "Thu Nov 16 2023 10:09:58 GMT+0530 (India Standard Time)",
+      "description": " Meeting with Another",
+      "duedate": "2023-11-17T15:15",
+      "id": 2
+    },
+    {
+      "title": "Gym",
+      "userId": 6,
+      "modifiedOn": "Thu Nov 16 2023 10:11:00 GMT+0530 (India Standard Time)",
+      "description": "Join the gym ",
+      "duedate": "2023-11-25T15:15",
+      "id": 3
+    },
+    {
+      "title": "Bill Payment",
+      "userId": 6,
+      "modifiedOn": "Thu Nov 16 2023 10:11:30 GMT+0530 (India Standard Time)",
+      "description": "Mobile postpaid bill payment",
+      "duedate": "2023-11-22T15:19",
+      "id": 4
+    },
+    {
+      "title": "Grocery",
+      "userId": 6,
+      "modifiedOn": "Thu Nov 16 2023 10:11:53 GMT+0530 (India Standard Time)",
+      "description": "Buy grocery for home.",
+      "duedate": "2023-11-24T15:19",
+      "id": 5
     }
   ]
 }
