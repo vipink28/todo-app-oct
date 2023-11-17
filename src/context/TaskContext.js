@@ -1,15 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import AuthContext from "../auth/AuthContext";
-
 const TaskContext = createContext();
-
-
 export const TaskProvider=({children})=>{
     const {setMessage, user} = useContext(AuthContext);
     const [allTasks, setAllTasks] = useState(null);
     const [latestTask, setLatestTask] = useState(null);
     const [recentTasks, setRecentTasks] = useState(null);
-
+    const [isCreated, setIsCreated] = useState(false);
 
     //create task
     const saveTask = async(formData)=>{
@@ -23,7 +20,7 @@ export const TaskProvider=({children})=>{
         const response = await fetch(`http://localhost:5000/tasks`, config);
         if(response.status === 201){
             setMessage("Task created successfully");
-
+            setIsCreated(true);
         }else{
             setMessage("Something went wrong");
         }
@@ -58,7 +55,8 @@ export const TaskProvider=({children})=>{
         saveTask,
         allTasks,
         latestTask,
-        recentTasks
+        recentTasks,
+        isCreated
     }}>
         {children}
     </TaskContext.Provider>
