@@ -10,15 +10,19 @@ function TaskForm(props) {
     }
 
     const [formData, setFormData] = useState(init);
-    const { message, user } = useContext(AuthContext);
-    const { saveTask, isCreated } = useContext(TaskContext);
-    const { isUpdate, data } = props;
+    const { message, setMessage, user } = useContext(AuthContext);
+    const { saveTask, isCreated, updateTask } = useContext(TaskContext);
+    const { isUpdate, data, setUpdate } = props;
 
     useEffect(() => {
         if (data && isUpdate) {
             setFormData(data);
         }
     }, [data, isUpdate])
+
+    useEffect(() => {
+        setMessage("");
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,12 +35,20 @@ function TaskForm(props) {
             }))
         }
     }
-
-
-
     const onCreate = (e) => {
         e.preventDefault();
         saveTask(formData);
+    }
+
+    const onUpdate = (e) => {
+        e.preventDefault();
+        updateTask(formData);
+    }
+
+    const onCancel = (e) => {
+        e.preventDefault();
+        setUpdate(false);
+        setFormData(init);
     }
 
     useEffect(() => {
@@ -71,8 +83,8 @@ function TaskForm(props) {
                         {
                             isUpdate ?
                                 <>
-                                    <button className='btn btn-primary' onClick={onCreate}>Update Task</button>
-                                    <button className='btn btn-warning ms-2' onClick={onCreate}>Cancel</button>
+                                    <button className='btn btn-primary' onClick={onUpdate}>Update Task</button>
+                                    <button className='btn btn-warning ms-2' onClick={onCancel}>Cancel</button>
                                 </>
                                 :
                                 <button className='btn btn-primary' onClick={onCreate}>Create Task</button>
