@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import TaskForm from './TaskForm';
 import { formatDate } from '../helper';
+import TaskContext from '../context/TaskContext';
+import AuthContext from '../auth/AuthContext';
 
 function Popup(props) {
     // const [data, setData] = useState();
     const { actionType, data } = props;
-    console.log(data);
+    const closeBtn = useRef(null);
+    const { deleteTask } = useContext(TaskContext);
+    const { message, setMessage } = useContext(AuthContext);
+
+    useEffect(() => {
+        setMessage("");
+    }, [])
+
+    const onDelete = () => {
+        deleteTask(data.id);
+    }
 
     return (
 
         <div className="modal-content bg-primary text-white">
             <div className="modal-header">
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button ref={closeBtn} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
                 {
@@ -25,10 +37,17 @@ function Popup(props) {
                             </div>
                         </div>
                         : actionType === "edit" ?
-                            <TaskForm />
+                            <TaskForm isUpdate={true} data={data} closeBtn={closeBtn} isPopup={true} />
                             :
                             <div>
-                                Delete
+                                {message !== "" ?
+                                    <p>{message}</p> :
+                                    <p>Are you sure, you want to delete this task ?</p>
+                                }
+                                <div className='d-flex mt-5'>
+                                    <button className='btn btn-danger ms-auto me-2' onClick={onDelete}>Yes</button>
+                                    <button className='btn btn-warning' data-bs-dismiss="modal">No</button>
+                                </div>
                             </div>
                 }
             </div>

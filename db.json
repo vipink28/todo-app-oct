@@ -44,14 +44,6 @@
       "id": 1
     },
     {
-      "title": "Meeting",
-      "userId": 6,
-      "modifiedOn": "Thu Nov 16 2023 10:09:58 GMT+0530 (India Standard Time)",
-      "description": " Meeting with Another",
-      "duedate": "2023-11-17T15:15",
-      "id": 2
-    },
-    {
       "title": "Gym",
       "userId": 6,
       "modifiedOn": "Thu Nov 16 2023 10:11:00 GMT+0530 (India Standard Time)",
@@ -82,14 +74,6 @@
       "description": " Meeting with client",
       "duedate": "2023-11-23T13:46",
       "id": 6
-    },
-    {
-      "title": "Grocery",
-      "userId": 6,
-      "modifiedOn": "Mon Nov 20 2023 09:59:30 GMT+0530 (India Standard Time)",
-      "description": "Buy grocery for home",
-      "duedate": "2023-11-26T14:51",
-      "id": 7
     }
   ]
 }
